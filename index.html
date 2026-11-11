@@ -1,0 +1,981 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KisanMithr | Smart Farming Platform</title>
+
+<!-- ================= CSS START ================= -->
+<style>
+:root {
+    --green: #174b2e;
+    --dark: #103722;
+    --light: #edf6e9;
+    --lime: #b8e986;
+    --white: #ffffff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f7faf5;
+    color: #26382b;
+}
+
+header {
+    background: var(--dark);
+    color: white;
+    padding: 18px 5%;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.logo {
+    font-size: 27px;
+    font-weight: bold;
+    color: var(--lime);
+}
+
+.logo span {
+    color: white;
+}
+
+nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: var(--lime);
+}
+
+select, input, button {
+    font: inherit;
+}
+
+select {
+    padding: 10px;
+    border-radius: 7px;
+    border: none;
+}
+
+.hero {
+    min-height: 520px;
+    padding: 90px 8%;
+    display: flex;
+    align-items: center;
+    color: white;
+    background:
+    linear-gradient(90deg, #082e1ddd, #082e1d55),
+    url("https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1800")
+    center/cover;
+}
+
+.hero-content {
+    max-width: 700px;
+}
+
+.hero h1 {
+    font-size: clamp(36px, 5vw, 60px);
+    line-height: 1.15;
+    margin-bottom: 20px;
+}
+
+.hero h1 span {
+    color: var(--lime);
+}
+
+.hero p {
+    font-size: 18px;
+    line-height: 1.7;
+    margin-bottom: 25px;
+}
+
+.btn {
+    display: inline-block;
+    background: #65a93d;
+    color: white;
+    padding: 13px 23px;
+    border: none;
+    border-radius: 7px;
+    text-decoration: none;
+    cursor: pointer;
+    font-weight: bold;
+    margin: 4px;
+}
+
+.btn:hover {
+    background: #397b29;
+}
+
+.search-area {
+    background: white;
+    padding: 25px 5%;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.search-area input {
+    width: min(550px, 75%);
+    padding: 14px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+section {
+    padding: 65px 7%;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.section-title h2 {
+    color: var(--green);
+    font-size: 32px;
+    margin-bottom: 12px;
+}
+
+.section-title p {
+    color: #68786b;
+    line-height: 1.6;
+}
+
+.services {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+}
+
+.card {
+    background: white;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px #00000010;
+    transition: .3s;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+}
+
+.card img {
+    width: 100%;
+    height: 185px;
+    object-fit: cover;
+}
+
+.card-content {
+    padding: 22px;
+}
+
+.card h3 {
+    color: var(--green);
+    margin-bottom: 12px;
+    font-size: 21px;
+}
+
+.card p {
+    color: #657368;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.small-btn {
+    display: inline-block;
+    padding: 10px 17px;
+    background: var(--green);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.light {
+    background: var(--light);
+}
+
+.info-box {
+    background: white;
+    padding: 25px;
+    border-radius: 13px;
+    overflow-x: auto;
+    box-shadow: 0 4px 15px #0000000c;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 450px;
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background: var(--green);
+    color: white;
+}
+
+.form-box {
+    max-width: 650px;
+    margin: auto;
+    padding: 30px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px #00000010;
+}
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+}
+
+.result {
+    display: none;
+    margin-top: 20px;
+    padding: 20px;
+    background: var(--light);
+    border-radius: 9px;
+    line-height: 1.8;
+}
+
+.weather-box {
+    max-width: 600px;
+    margin: auto;
+    background: white;
+    text-align: center;
+    padding: 35px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px #00000010;
+}
+
+.weather-icon {
+    font-size: 55px;
+}
+
+.temperature {
+    font-size: 45px;
+    font-weight: bold;
+    color: var(--green);
+    margin: 12px;
+}
+
+.scheme {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px #0000000c;
+}
+
+.scheme h3 {
+    color: var(--green);
+    margin-bottom: 12px;
+}
+
+.scheme p {
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+footer {
+    background: var(--dark);
+    color: white;
+    text-align: center;
+    padding: 35px 5%;
+    line-height: 2;
+}
+
+.voice {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    width: 58px;
+    height: 58px;
+    border: none;
+    border-radius: 50%;
+    background: #267a42;
+    color: white;
+    font-size: 25px;
+    cursor: pointer;
+    z-index: 999;
+    box-shadow: 0 4px 15px #0004;
+}
+
+#voiceStatus {
+    position: fixed;
+    bottom: 90px;
+    right: 20px;
+    background: white;
+    padding: 10px;
+    border-radius: 8px;
+    z-index: 999;
+}
+
+.no-results {
+    display: none;
+    text-align: center;
+    padding: 25px;
+}
+
+@media(max-width: 800px) {
+    .navbar {
+        justify-content: center;
+    }
+
+    nav {
+        justify-content: center;
+    }
+}
+
+@media(max-width: 550px) {
+    section {
+        padding: 45px 5%;
+    }
+
+    .hero {
+        padding: 60px 6%;
+    }
+
+    nav a {
+        font-size: 12px;
+    }
+}
+</style>
+<!-- ================= CSS END ================= -->
+
+</head>
+
+<body>
+
+<!-- ================= HTML START ================= -->
+
+<header>
+<div class="navbar">
+
+    <div class="logo">🌱 Kisan<span>Mithr</span></div>
+
+    <nav>
+        <a href="#home" data-en="Home" data-te="హోమ్">Home</a>
+        <a href="#services" data-en="Services" data-te="సేవలు">Services</a>
+        <a href="#market" data-en="Market" data-te="మార్కెట్">Market</a>
+        <a href="#labour" data-en="Labour" data-te="కూలీలు">Labour</a>
+        <a href="#vehicles" data-en="Vehicles" data-te="వాహనాలు">Vehicles</a>
+        <a href="#calculator" data-en="Calculator" data-te="లెక్కింపు">Calculator</a>
+        <a href="#weather" data-en="Weather" data-te="వాతావరణం">Weather</a>
+        <a href="#schemes" data-en="Schemes" data-te="పథకాలు">Schemes</a>
+    </nav>
+
+    <select id="language" onchange="changeLanguage()">
+        <option value="en">English</option>
+        <option value="te">తెలుగు</option>
+    </select>
+
+</div>
+</header>
+
+<!-- HOME -->
+
+<div class="hero" id="home">
+<div class="hero-content">
+
+    <h1 data-en="Smart Farming for a Better <span>Tomorrow</span>"
+        data-te="మెరుగైన <span>రేపటి</span> కోసం స్మార్ట్ వ్యవసాయం">
+        Smart Farming for a Better <span>Tomorrow</span>
+    </h1>
+
+    <p data-en="Your digital farming companion. Discover market prices, labour, farm vehicles, crop calculator, weather and government schemes."
+       data-te="మార్కెట్ ధరలు, కూలీలు, వాహనాలు, పంట లెక్కింపు, వాతావరణం మరియు ప్రభుత్వ పథకాల కోసం మీ డిజిటల్ వ్యవసాయ మిత్రుడు.">
+       Your digital farming companion. Discover market prices, labour, farm vehicles, crop calculator, weather and government schemes.
+    </p>
+
+    <a href="#services" class="btn">Explore Services →</a>
+    <a href="#about" class="btn">About Us</a>
+
+</div>
+</div>
+
+<!-- SEARCH -->
+
+<div class="search-area">
+    <input type="text" id="search"
+    placeholder="Search farming services..."
+    oninput="searchServices()">
+    <button class="btn" onclick="searchServices()">🔍 Search</button>
+</div>
+
+<!-- SERVICES -->
+
+<section id="services">
+
+<div class="section-title">
+    <h2>Our Farming Services</h2>
+    <p>Everything farmers need, all in one place.</p>
+</div>
+
+<div class="services">
+
+<div class="card searchable">
+    <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=700" alt="Agricultural fields">
+    <div class="card-content">
+        <h3>🌾 Market Prices</h3>
+        <p>Check indicative prices of agricultural products and understand market trends.</p>
+        <a href="#market" class="small-btn">View Prices</a>
+    </div>
+</div>
+
+<div class="card searchable">
+    <img src="https://images.unsplash.com/photo-1594708767771-a7502209ff51?w=700" alt="Farm workers">
+    <div class="card-content">
+        <h3>👨‍🌾 Labour Services</h3>
+        <p>Explore worker requirements for planting, harvesting and other farming activities.</p>
+        <a href="#labour" class="small-btn">Find Labour</a>
+    </div>
+</div>
+
+<div class="card searchable">
+    <img src="https://images.unsplash.com/photo-1589923188900-85dae523342b?w=700" alt="Farm tractor">
+    <div class="card-content">
+        <h3>🚜 Farm Vehicles</h3>
+        <p>Explore tractor, harvester and agricultural transportation services.</p>
+        <a href="#vehicles" class="small-btn">Find Vehicles</a>
+    </div>
+</div>
+
+<div class="card searchable">
+    <img src="https://images.unsplash.com/photo-1499529112087-3cb3b73cec95?w=700" alt="Farm crops">
+    <div class="card-content">
+        <h3>🧮 Crop Calculator</h3>
+        <p>Calculate estimated crop yield and expected income based on your land.</p>
+        <a href="#calculator" class="small-btn">Calculate Now</a>
+    </div>
+</div>
+
+<div class="card searchable">
+    <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=700" alt="Weather landscape">
+    <div class="card-content">
+        <h3>🌤️ Weather Updates</h3>
+        <p>Check current weather information to help plan agricultural activities.</p>
+        <a href="#weather" class="small-btn">Check Weather</a>
+    </div>
+</div>
+
+<div class="card searchable">
+    <img src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=700" alt="Agriculture">
+    <div class="card-content">
+        <h3>🏛️ Government Schemes</h3>
+        <p>Discover agricultural support programs and official government portals.</p>
+        <a href="#schemes" class="small-btn">Explore Schemes</a>
+    </div>
+</div>
+
+</div>
+
+<p class="no-results" id="noResults">No services found.</p>
+</section>
+
+<!-- MARKET PRICES -->
+
+<section class="light" id="market">
+
+<div class="section-title">
+    <h2>🌾 Agricultural Market Prices</h2>
+    <p>Illustrative sample prices. Verify current rates with your local mandi.</p>
+</div>
+
+<div class="info-box">
+<table>
+<tr>
+    <th>Crop</th>
+    <th>Sample Price (₹/Quintal)</th>
+    <th>Unit</th>
+</tr>
+<tr><td>Rice</td><td>2,300</td><td>Quintal</td></tr>
+<tr><td>Maize</td><td>2,100</td><td>Quintal</td></tr>
+<tr><td>Cotton</td><td>7,500</td><td>Quintal</td></tr>
+<tr><td>Turmeric</td><td>12,000</td><td>Quintal</td></tr>
+<tr><td>Red Gram</td><td>7,000</td><td>Quintal</td></tr>
+<tr><td>Groundnut</td><td>6,500</td><td>Quintal</td></tr>
+</table>
+</div>
+
+</section>
+
+<!-- LABOUR -->
+
+<section id="labour">
+
+<div class="section-title">
+    <h2>👨‍🌾 Labour Services</h2>
+    <p>Find agricultural workers for your farming needs.</p>
+</div>
+
+<div class="services">
+
+<div class="scheme">
+    <h3>🌱 Planting Workers</h3>
+    <p>Workers for sowing, transplanting and planting activities.</p>
+    <button class="small-btn" onclick="requestService('Planting Workers')">Request Details</button>
+</div>
+
+<div class="scheme">
+    <h3>🌾 Harvesting Workers</h3>
+    <p>Find workers for crop harvesting and collection.</p>
+    <button class="small-btn" onclick="requestService('Harvesting Workers')">Request Details</button>
+</div>
+
+<div class="scheme">
+    <h3>🌿 General Farm Workers</h3>
+    <p>Workers for cleaning, weeding and other farm activities.</p>
+    <button class="small-btn" onclick="requestService('General Farm Workers')">Request Details</button>
+</div>
+
+</div>
+</section>
+
+<!-- VEHICLES -->
+
+<section class="light" id="vehicles">
+
+<div class="section-title">
+    <h2>🚜 Agricultural Vehicle Services</h2>
+    <p>Explore farm machinery and transportation services.</p>
+</div>
+
+<div class="services">
+
+<div class="scheme">
+    <h3>🚜 Tractor Rental</h3>
+    <p>For ploughing, land preparation and transportation.</p>
+    <button class="small-btn" onclick="requestService('Tractor Rental')">Request Details</button>
+</div>
+
+<div class="scheme">
+    <h3>🌾 Harvester Rental</h3>
+    <p>Explore harvesting machine rental requirements.</p>
+    <button class="small-btn" onclick="requestService('Harvester Rental')">Request Details</button>
+</div>
+
+<div class="scheme">
+    <h3>🚛 Farm Transport</h3>
+    <p>Transport crops and products to nearby markets.</p>
+    <button class="small-btn" onclick="requestService('Farm Transport')">Request Details</button>
+</div>
+
+</div>
+</section>
+
+<!-- CROP CALCULATOR -->
+
+<section id="calculator">
+
+<div class="section-title">
+    <h2>🧮 Crop Yield & Income Calculator</h2>
+    <p>Estimate your crop production and expected income.</p>
+</div>
+
+<div class="form-box">
+
+<div class="form-group">
+    <label>Select Crop</label>
+    <select id="crop">
+        <option>Rice</option>
+        <option>Maize</option>
+        <option>Cotton</option>
+        <option>Groundnut</option>
+        <option>Red Gram</option>
+        <option>Turmeric</option>
+    </select>
+</div>
+
+<div class="form-group">
+    <label>Land Area (Acres)</label>
+    <input type="number" id="area" min="0.01" step="any" placeholder="Enter acres">
+</div>
+
+<div class="form-group">
+    <label>Expected Yield Per Acre (Quintals)</label>
+    <input type="number" id="yield" min="0" step="any" placeholder="Enter yield">
+</div>
+
+<div class="form-group">
+    <label>Price Per Quintal (₹)</label>
+    <input type="number" id="price" min="0" step="any" placeholder="Enter price">
+</div>
+
+<button class="btn" onclick="calculateCrop()">Calculate Income</button>
+
+<div class="result" id="result"></div>
+
+</div>
+</section>
+
+<!-- WEATHER -->
+
+<section class="light" id="weather">
+
+<div class="section-title">
+    <h2>🌤️ Live Weather Updates</h2>
+    <p>Check weather for Hyderabad or your current location.</p>
+</div>
+
+<div class="weather-box">
+
+<div class="weather-icon">🌤️</div>
+<h3 id="city">Hyderabad, Telangana</h3>
+<div class="temperature" id="temp">-- °C</div>
+<p id="description">Click Get Weather to load current conditions.</p>
+<p id="humidity">Humidity: --</p>
+<p id="wind">Wind Speed: --</p>
+
+<br>
+
+<button class="btn" onclick="getWeather()">Get Hyderabad Weather</button>
+<button class="small-btn" onclick="getMyWeather()">My Location</button>
+
+<p id="weatherMessage" style="margin-top:15px;color:#a33"></p>
+
+</div>
+</section>
+
+<!-- GOVERNMENT SCHEMES -->
+
+<section id="schemes">
+
+<div class="section-title">
+    <h2>🏛️ Government Agriculture Schemes</h2>
+    <p>Explore official government agricultural support portals.</p>
+</div>
+
+<div class="services">
+
+<div class="scheme">
+    <h3>🌾 PM-KISAN</h3>
+    <p>Income support scheme for eligible farmer families. Check current eligibility and guidelines.</p>
+    <a class="small-btn" href="https://pmkisan.gov.in/" target="_blank" rel="noopener">Official Website ↗</a>
+</div>
+
+<div class="scheme">
+    <h3>🌱 PM Fasal Bima Yojana</h3>
+    <p>Explore crop insurance information, coverage and enrollment details.</p>
+    <a class="small-btn" href="https://pmfby.gov.in/" target="_blank" rel="noopener">Official Website ↗</a>
+</div>
+
+<div class="scheme">
+    <h3>🚜 Farm Mechanization</h3>
+    <p>Explore information on agricultural machinery and mechanization programs.</p>
+    <a class="small-btn" href="https://agrimachinery.nic.in/" target="_blank" rel="noopener">Official Website ↗</a>
+</div>
+
+<div class="scheme">
+    <h3>💳 Kisan Credit Card</h3>
+    <p>Learn about agricultural credit facilities and participating banks.</p>
+    <a class="small-btn" href="https://www.nabard.org/" target="_blank" rel="noopener">NABARD Website ↗</a>
+</div>
+
+</div>
+</section>
+
+<!-- ABOUT -->
+
+<section class="light" id="about">
+
+<div class="section-title">
+    <h2>🌿 About KisanMithr</h2>
+    <p>
+        KisanMithr is a smart digital farming platform designed to bring
+        important agricultural services together in one place.
+        It helps farmers explore market information, labour, vehicles,
+        crop planning, weather updates and government schemes.
+        Our mission is to connect farmers with useful technology
+        and make agricultural information easier to access.
+    </p>
+</div>
+
+</section>
+
+<footer>
+    <h2>🌱 KisanMithr</h2>
+    <p>Your Smart Farming Companion</p>
+    <p>Empowering Farmers Through Technology</p>
+    <p>© 2026 KisanMithr. All Rights Reserved.</p>
+</footer>
+
+<button class="voice" onclick="startVoice()" title="Voice Search">🎤</button>
+<p id="voiceStatus"></p>
+
+<!-- ================= HTML END ================= -->
+
+
+<!-- ================= JAVASCRIPT START ================= -->
+
+<script>
+
+// LANGUAGE SWITCHING
+
+function changeLanguage() {
+    const lang = document.getElementById("language").value;
+
+    document.querySelectorAll("[data-en]").forEach(element => {
+        element.innerHTML = element.getAttribute("data-" + lang);
+    });
+
+    document.documentElement.lang = lang;
+
+    document.getElementById("search").placeholder =
+        lang === "te" ? "వ్యవసాయ సేవలను వెతకండి..." :
+        "Search farming services...";
+}
+
+// SEARCH SERVICES
+
+function searchServices() {
+    const search = document.getElementById("search")
+        .value.toLowerCase();
+
+    const cards = document.querySelectorAll(".searchable");
+    let count = 0;
+
+    cards.forEach(card => {
+        const match = card.innerText.toLowerCase().includes(search);
+        card.style.display = match ? "block" : "none";
+        if (match) count++;
+    });
+
+    document.getElementById("noResults").style.display =
+        count === 0 ? "block" : "none";
+}
+
+// CROP CALCULATOR
+
+function calculateCrop() {
+    const crop = document.getElementById("crop").value;
+    const area = Number(document.getElementById("area").value);
+    const yieldValue = Number(document.getElementById("yield").value);
+    const price = Number(document.getElementById("price").value);
+
+    if (!Number.isFinite(area) || !Number.isFinite(yieldValue) ||
+        !Number.isFinite(price) || area <= 0 ||
+        yieldValue < 0 || price < 0) {
+        alert("Please enter valid values in all fields.");
+        return;
+    }
+
+    const totalYield = area * yieldValue;
+    const income = totalYield * price;
+
+    document.getElementById("result").style.display = "block";
+
+    document.getElementById("result").innerHTML = `
+        <h3>🌾 Calculation Result</h3>
+        <p>Crop: ${crop}</p>
+        <p>Land: ${area} Acres</p>
+        <p>Total Expected Yield: ${totalYield.toFixed(2)} Quintals</p>
+        <p>Price: ₹${price.toLocaleString("en-IN")}</p>
+        <h3>Estimated Gross Income: ₹${income.toLocaleString("en-IN", {
+            maximumFractionDigits: 2
+        })}</h3>
+        <small>This is an estimate, not guaranteed profit.
+        Farming expenses are not deducted.</small>
+    `;
+}
+
+// WEATHER API
+
+async function loadWeather(lat, lon, location) {
+    const message = document.getElementById("weatherMessage");
+    message.innerText = "Loading weather...";
+
+    try {
+        const url =
+        `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m&timezone=auto`;
+
+        const response = await fetch(url);
+
+        if (!response.ok) throw new Error("Weather unavailable");
+
+        const data = await response.json();
+        const current = data.current;
+
+        const conditions = {
+            0: "Clear Sky ☀️",
+            1: "Mainly Clear 🌤️",
+            2: "Partly Cloudy ⛅",
+            3: "Overcast ☁️",
+            45: "Foggy 🌫️",
+            48: "Foggy 🌫️",
+            51: "Light Drizzle 🌦️",
+            53: "Drizzle 🌦️",
+            55: "Heavy Drizzle 🌧️",
+            61: "Light Rain 🌧️",
+            63: "Moderate Rain 🌧️",
+            65: "Heavy Rain 🌧️",
+            80: "Rain Showers 🌦️",
+            81: "Rain Showers 🌧️",
+            82: "Heavy Rain Showers ⛈️",
+            95: "Thunderstorm ⛈️",
+            96: "Thunderstorm with Hail ⛈️",
+            99: "Thunderstorm with Hail ⛈️"
+        };
+
+        document.getElementById("city").innerText = location;
+        document.getElementById("temp").innerText =
+            current.temperature_2m + " °C";
+
+        document.getElementById("description").innerText =
+            conditions[current.weather_code] || "Weather updated";
+
+        document.getElementById("humidity").innerText =
+            "Humidity: " + current.relative_humidity_2m + "%";
+
+        document.getElementById("wind").innerText =
+            "Wind Speed: " + current.wind_speed_10m + " km/h";
+
+        message.innerText = "Weather updated successfully.";
+
+    } catch (error) {
+        message.innerText =
+            "Unable to load weather. Check your internet and try again.";
+    }
+}
+
+function getWeather() {
+    loadWeather(17.3850, 78.4867, "Hyderabad, Telangana");
+}
+
+function getMyWeather() {
+    const message = document.getElementById("weatherMessage");
+
+    if (!navigator.geolocation) {
+        message.innerText = "Location is not supported.";
+        return;
+    }
+
+    message.innerText = "Getting your location...";
+
+    navigator.geolocation.getCurrentPosition(
+        position => {
+            loadWeather(
+                position.coords.latitude,
+                position.coords.longitude,
+                "Your Current Location"
+            );
+        },
+        () => {
+            message.innerText =
+                "Location permission denied. Try Hyderabad weather.";
+        }
+    );
+}
+
+// VOICE ASSISTANCE
+
+function startVoice() {
+    const Recognition =
+        window.SpeechRecognition ||
+        window.webkitSpeechRecognition;
+
+    if (!Recognition) {
+        alert("Voice recognition is not supported. Try Chrome.");
+        return;
+    }
+
+    const recognition = new Recognition();
+
+    recognition.lang =
+        document.getElementById("language").value === "te"
+        ? "te-IN" : "en-IN";
+
+    recognition.start();
+
+    document.getElementById("voiceStatus").innerText =
+        "🎤 Listening...";
+
+    recognition.onresult = function(event) {
+        const speech = event.results[0][0].transcript;
+
+        document.getElementById("search").value = speech;
+        searchServices();
+
+        document.getElementById("voiceStatus").innerText =
+            "You said: " + speech;
+    };
+
+    recognition.onerror = function() {
+        document.getElementById("voiceStatus").innerText =
+            "Voice recognition failed. Try again.";
+    };
+
+    recognition.onend = function() {
+        setTimeout(() => {
+            document.getElementById("voiceStatus").innerText = "";
+        }, 4000);
+    };
+}
+
+// LABOUR AND VEHICLE REQUEST DEMO
+
+function requestService(service) {
+    const location = prompt("Enter your village or location:");
+
+    if (location && location.trim()) {
+        alert(
+            service + "\nLocation: " + location +
+            "\n\nDemo only: No actual booking has been submitted."
+        );
+    }
+}
+
+// INITIAL WEATHER
+
+window.addEventListener("DOMContentLoaded", getWeather);
+
+</script>
+
+<!-- ================= JAVASCRIPT END ================= -->
+
+</body>
+</html>
